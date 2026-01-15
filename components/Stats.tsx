@@ -1,14 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BarChart3, TrendingUp, Zap } from 'lucide-react';
+import { BarChart3, MousePointerClick, Timer } from 'lucide-react';
 
 const StatCard: React.FC<{
   icon: React.ReactNode;
   value: string;
   label: string;
   delay: number;
-  colorClass: string;
-}> = ({ icon, value, label, delay, colorClass }) => (
+  bgClass: string;
+  textClass: string;
+  borderClass: string;
+}> = ({ icon, value, label, delay, bgClass, textClass, borderClass }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -17,8 +19,8 @@ const StatCard: React.FC<{
     whileHover={{ y: -5 }}
     className="bg-white/60 backdrop-blur-md border border-white/50 shadow-xl shadow-slate-200/40 p-6 rounded-3xl flex flex-col items-center text-center relative overflow-hidden group"
   >
-    <div className={`absolute top-0 left-0 w-full h-1 ${colorClass} opacity-0 group-hover:opacity-100 transition-opacity`}></div>
-    <div className={`mb-4 p-3 rounded-2xl ${colorClass.replace('bg-', 'bg-').replace('500', '50')} ${colorClass.replace('bg-', 'text-')}`}>
+    <div className={`absolute top-0 left-0 w-full h-1 ${borderClass} opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+    <div className={`mb-4 p-4 rounded-2xl ${bgClass} ${textClass}`}>
       {icon}
     </div>
     <h3 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-2 tracking-tight">{value}</h3>
@@ -47,25 +49,31 @@ export const Stats: React.FC = () => {
 
         <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
           <StatCard 
-            icon={<BarChart3 size={24} />}
+            icon={<BarChart3 size={32} />}
             value="10,000+"
             label="Listings Analyzed"
             delay={0}
-            colorClass="bg-indigo-500"
+            bgClass="bg-indigo-50"
+            textClass="text-indigo-600"
+            borderClass="bg-indigo-500"
           />
           <StatCard 
-            icon={<TrendingUp size={24} />}
+            icon={<MousePointerClick size={32} />}
             value="20%"
             label="Avg. Click-Through Uplift"
             delay={0.1}
-            colorClass="bg-pik-blue"
+            bgClass="bg-sky-50"
+            textClass="text-pik-blue"
+            borderClass="bg-pik-blue"
           />
            <StatCard 
-            icon={<Zap size={24} />}
+            icon={<Timer size={32} />}
             value="30s"
             label="Average Audit Time"
             delay={0.2}
-            colorClass="bg-pik-green"
+            bgClass="bg-emerald-50"
+            textClass="text-emerald-600"
+            borderClass="bg-pik-green"
           />
         </div>
       </div>
